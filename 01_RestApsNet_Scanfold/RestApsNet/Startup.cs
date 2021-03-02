@@ -13,8 +13,10 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using RestApsNet.Model.Context;
-using RestApsNet.Services;
-using RestApsNet.Services.Implemetetions;
+using RestApsNet.Business;
+using RestApsNet.Business.Implemetetions;
+using RestApsNet.Repository;
+using RestApsNet.Repository.Implemetetions;
 
 namespace RestApsNet
 {
@@ -35,9 +37,14 @@ namespace RestApsNet
 
             var connection = Configuration["MySqlConnection:MySqlConnectionString"];
             services.AddDbContext<MySqlContext>(options => options.UseMySql(connection));
+
+
+            services.AddApiVersioning();
             ///Dependency Injection//
-            services.AddScoped<IPersonService, PersonServiceImplemetation>();
-           
+            services.AddScoped<IPersonBusiness, PersonBusinessImplemetation>();
+            services.AddScoped<IPersonRepository, PersonRepositoryImplemetation>();
+
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "RestApsNet", Version = "v1" });

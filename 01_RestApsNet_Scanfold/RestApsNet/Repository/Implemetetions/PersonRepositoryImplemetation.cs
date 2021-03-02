@@ -6,14 +6,14 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace RestApsNet.Services.Implemetetions
+namespace RestApsNet.Repository.Implemetetions
 {
-    public class PersonServiceImplemetation : IPersonService
+    public class PersonRepositoryImplemetation : IPersonRepository
     {
 
         private MySqlContext _context;
 
-        public PersonServiceImplemetation(MySqlContext context)
+        public PersonRepositoryImplemetation(MySqlContext context)
         {
             _context = context;
 
@@ -78,7 +78,7 @@ namespace RestApsNet.Services.Implemetetions
 
         public Person Update(Person person)
         {
-            if (!Exists(person.Id)) return new Person();
+            if (!Exists(person.Id)) return null;
 
             var result = _context.Persons.SingleOrDefault(p => p.Id.Equals(person.Id));
 
@@ -102,7 +102,7 @@ namespace RestApsNet.Services.Implemetetions
             return person;
         }
 
-        private bool Exists(long id)
+        public bool Exists(long id)
         {
 
             return _context.Persons.Any(p => p.Id.Equals(id));

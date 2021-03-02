@@ -3,9 +3,9 @@ using System.Collections.Generic;
 
 using RestApsNet.Model;
 
-namespace RestApsNet.Services
+namespace RestApsNet.Repository
 {
-    public interface IPersonService
+    public interface IPersonRepository
     {
         Person Create(Person person);
 
@@ -15,6 +15,8 @@ namespace RestApsNet.Services
         Person Update(Person person);
 
         void Delete(long id);
+        bool Exists(long id);
+
 
 
     }
