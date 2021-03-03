@@ -1,0 +1,20 @@
+﻿using Microsoft.EntityFrameworkCore;
+using RestApsNet.Model;
+
+namespace RestWithASPNETUdemy.Model.Context
+{
+    public class MySQLContext : DbContext
+    {
+        public MySQLContext()
+        {
+
+        }
+        public MySQLContext(DbContextOptions<MySQLContext> options) : base(options) { }
+        
+
+        public DbSet<Person> Persons { get; set; }
+        public DbSet<Books> Books { get; set;
+        }
+    }
+
+}
